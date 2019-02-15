@@ -4,8 +4,8 @@
 \alias{aggiungiRisultatiModulo}
 \title{Una funzione che aggrega output di aggiornaStudentiVoti.}
 \usage{
-aggiungiRisultatiModulo(excel.esame, input.voti, output.voti,
-  modulo = c("BB", "BM", "GU"))
+aggiungiRisultatiModulo(excel.esame, input.voti, input.crediti,
+  output.voti, modulo = c("BB", "BM", "GU"))
 }
 \arguments{
 \item{excel.esame, }{e' l'excel scaricato per un modulo dalle prove parziali su SS3.}
@@ -26,13 +26,13 @@ Una funzione che aggrega output aggiornaStudentiVoti per i tre moduli.
 \dontrun{
 
 aggiungiRisultatiModulo(excel.esame="basi_biologiche.xls", 
-                        input.voti="studenti_voti.txt", 
+                        input.voti="studenti_voti.txt",
                         output.voti="studenti_votiBB.txt", modulo="BB")
 aggiungiRisultatiModulo(excel.esame="biologia_molecolare.xls", 
-                        input.voti="studenti_votiBB.txt", 
+                        input.voti="studenti_votiBB.txt",
                         output.voti="studenti_votiBBBM.txt", modulo="BM")
 aggiungiRisultatiModulo(excel.esame="genetica_umana.xls", 
-                        input.voti="studenti_votiBBBM.txt", 
+                        input.voti="studenti_votiBBBM.txt",
                         output.voti="studenti_votiBBBMGU.txt", modulo="GU")
 
 }

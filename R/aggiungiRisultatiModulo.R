@@ -11,21 +11,21 @@
 #' \dontrun{
 #'
 #' aggiungiRisultatiModulo(excel.esame="basi_biologiche.xls", 
-#'                         input.voti="studenti_voti.txt", 
+#'                         input.voti="studenti_voti.txt",
 #'                         output.voti="studenti_votiBB.txt", modulo="BB")
 #' aggiungiRisultatiModulo(excel.esame="biologia_molecolare.xls", 
-#'                         input.voti="studenti_votiBB.txt", 
+#'                         input.voti="studenti_votiBB.txt",
 #'                         output.voti="studenti_votiBBBM.txt", modulo="BM")
 #' aggiungiRisultatiModulo(excel.esame="genetica_umana.xls", 
-#'                         input.voti="studenti_votiBBBM.txt", 
+#'                         input.voti="studenti_votiBBBM.txt",
 #'                         output.voti="studenti_votiBBBMGU.txt", modulo="GU")
 #' 
 #' }
 #'
 #' @export
 
-aggiungiRisultatiModulo <- function(excel.esame, input.voti, output.voti, modulo=c("BB","BM", "GU")){
-  
+aggiungiRisultatiModulo <- function(excel.esame, input.voti, input.crediti, output.voti, modulo=c("BB","BM", "GU")){
+  crediti <- read.table(paste(path.package(package="BBBMGU"),"/inst/crediti.txt",sep="/"), sep="\t", header=T, stringsAsFactors = F)
   studenti.voti <- read.table(input.voti, sep="\t", header=T, stringsAsFactors = F, quote = "\"")
   
   bb <- loadWorkbook(excel.esame)
