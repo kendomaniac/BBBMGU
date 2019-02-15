@@ -1,0 +1,18 @@
+Package: BBBMGU
+Version: 0.0.1
+Title: Un tool per aggregare dati di esami parziali di un corso integrato
+Date: 2019-15-02
+Authors@R: c(person("Raffaele", "Calogero", role = c("aut", "cre"),
+                     email = "raffaele.calogero@unito.it"))
+Author: Raffaele Calogero [aut, cre],
+Maintainer: Raffaele Calogero <raffaele.calogero@unito.it>
+Depends:
+    R (>= 3.0.0), XLConnect
+VignetteBuilder: knitr
+Suggests: knitr, rmarkdown
+BiocStyle: :html_document
+Description:Una serie di funzioni per aggregare dati di esami parziali di un corso integrato
+License: GPL (>= 2)
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1
