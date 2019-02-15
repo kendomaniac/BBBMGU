@@ -1,6 +1,6 @@
 #' @title Una funzione che crea una lista voti.
 #' @description Una funzione che crea una lista voti vuota e la aggiorna per la presenza di studenti non presenti nella lista dell'anno in corso.
-#' @param excel.esame, e' l'excel scaricato per un modulo dalle prove parziali su SS3
+#' @param excel.esame, e' l'excel scaricato per un modulo dalle prove parziali su SS3.
 #' @param elenco.studenti, e' l'elenco degli studenti dell'anno in corso per un certo canale. 
 #' @author Raffaele Calogero, raffaele.calogero [at] unito [dot] it, University of Torino, Italy
 #' @return  Un data.frame aggiornato con i nuovi studenti. Importante questo data.frame e' completamente vuoto

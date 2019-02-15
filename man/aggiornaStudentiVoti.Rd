@@ -7,9 +7,9 @@
 aggiornaStudentiVoti(excel.esame, elenco.studenti)
 }
 \arguments{
-\item{excel.esame, }{e' l'excel scaricato per un modulo dalle prove parziali su SS3}
+\item{excel.esame, }{e' l'excel scaricato per un modulo dalle prove parziali su SS3.}
 
-\item{elenco.studenti, elenco.studenti}{e' l'elenco degli studenti dell'anno in corso per un certo canale.}
+\item{elenco.studenti, }{e' l'elenco degli studenti dell'anno in corso per un certo canale.}
 }
 \value{
 Un data.frame aggiornato con i nuovi studenti. Importante questo data.frame e' completamente vuoto
