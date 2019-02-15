@@ -1,0 +1,4 @@
+modulo	crediti	percentuale
+Basi Biologiche	8	53.4
+Biologia Molecolare	5	33.3
+Genetica Umana	2	13.3

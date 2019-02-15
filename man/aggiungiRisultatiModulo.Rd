@@ -4,8 +4,8 @@
 \alias{aggiungiRisultatiModulo}
 \title{Una funzione che aggrega output di aggiornaStudentiVoti.}
 \usage{
-aggiungiRisultatiModulo(excel.esame, input.voti, input.crediti,
-  output.voti, modulo = c("BB", "BM", "GU"))
+aggiungiRisultatiModulo(excel.esame, input.voti, output.voti,
+  modulo = c("BB", "BM", "GU"))
 }
 \arguments{
 \item{excel.esame, }{e' l'excel scaricato per un modulo dalle prove parziali su SS3.}

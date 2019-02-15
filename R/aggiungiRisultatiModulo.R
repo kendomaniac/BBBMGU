@@ -24,7 +24,7 @@
 #'
 #' @export
 
-aggiungiRisultatiModulo <- function(excel.esame, input.voti, input.crediti, output.voti, modulo=c("BB","BM", "GU")){
+aggiungiRisultatiModulo <- function(excel.esame, input.voti, output.voti, modulo=c("BB","BM", "GU")){
   crediti <- read.table(paste(path.package(package="BBBMGU"),"/inst/crediti.txt",sep="/"), sep="\t", header=T, stringsAsFactors = F)
   studenti.voti <- read.table(input.voti, sep="\t", header=T, stringsAsFactors = F, quote = "\"")
   
