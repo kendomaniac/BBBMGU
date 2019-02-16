@@ -27,43 +27,43 @@ aggregaVotiModuli <- function(input.voti="studenti_votiBBBMGU.txt", output.voti=
         studenti.voti$VotoAggregato[i] <- as.character(round(studenti.voti$BasiBiologicheNorm[i] + studenti.voti$BiologiaMolecolareNorm[i] + studenti.voti$GeneticaUmanaNorm[i]))
       }
     }else if(!is.na(studenti.voti$CFU[i]) && studenti.voti$CFU[i] == 13){
-      #BB and BM already done
+      #BB e BM da fare
       if(!is.na(studenti.voti[i,6]) && !is.na(studenti.voti[i,8]) && is.na(studenti.voti[i,10])){
         studenti.voti$VotoAggregato[i] <- as.character(round(studenti.voti$BasiBiologicheNorm[i] + studenti.voti$BiologiaMolecolareNorm[i]))
       }
     }else if(!is.na(studenti.voti$CFU[i]) && studenti.voti$CFU[i] == 10){
-      #BB and GU already done
+      #BB e GU da fare
       if(!is.na(studenti.voti[i,6]) && is.na(studenti.voti[i,8]) && !is.na(studenti.voti[i,10])){
         studenti.voti$VotoAggregato[i] <- as.character(round(studenti.voti$BasiBiologicheNorm[i] + studenti.voti$GeneticaUmanaNorm[i]))
       }
     }else if(!is.na(studenti.voti$CFU[i]) && studenti.voti$CFU[i] == 7){
-      #BM and GU already done
+      #BM e GU da fare
       if(is.na(studenti.voti[i,6]) && !is.na(studenti.voti[i,8]) && !is.na(studenti.voti[i,10])){
         studenti.voti$VotoAggregato[i] <- as.character(round(studenti.voti$BiologiaMolecolareNorm[i] + studenti.voti$GeneticaUmanaNorm[i]))
       }
     }else if(!is.na(studenti.voti$CFU[i]) && studenti.voti$CFU[i] == 11){
-      #BM and GU already done
+      #BB e GU da fare
       if(!is.na(studenti.voti[i,6]) && is.na(studenti.voti[i,8]) && !is.na(studenti.voti[i,10])){
         studenti.voti$VotoAggregato[i] <- as.character(round(studenti.voti$BasiBiologicheNorm[i] + studenti.voti$GeneticaUmanaNorm[i]))
       }
     }else if(!is.na(studenti.voti$CFU[i]) && studenti.voti$CFU[i] == 3){
-      #BM and BB already done
+      #GU da fare 
       if(is.na(studenti.voti[i,6]) && is.na(studenti.voti[i,8]) && !is.na(studenti.voti[i,10])){
         studenti.voti$VotoAggregato[i] <- as.character(round(studenti.voti$GeneticaUmanaNorm[i]))
       }
     }else if(!is.na(studenti.voti$CFU[i]) && studenti.voti$CFU[i] == 2){
-      #BM and BB already done
+      #GU da fare 
       if(is.na(studenti.voti[i,6]) && is.na(studenti.voti[i,8]) && !is.na(studenti.voti[i,10])){
         studenti.voti$VotoAggregato[i] <- as.character(round(studenti.voti$GeneticaUmanaNorm[i]))
       }
     }else if(!is.na(studenti.voti$CFU[i]) && studenti.voti$CFU[i] == 5){
-      #BB and GU already done
-      if(is.na(studenti.voti[i,6]) && is.na(studenti.voti[i,8]) && !is.na(studenti.voti[i,10])){
+      #BM da fare
+      if(is.na(studenti.voti[i,6]) && !is.na(studenti.voti[i,8]) && is.na(studenti.voti[i,10])){
         studenti.voti$VotoAggregato[i] <- as.character(round(studenti.voti$BiologiaMolecolareNorm[i]))
       }
     }else if(!is.na(studenti.voti$CFU[i]) && studenti.voti$CFU[i] == 8){
-      #BM and GU already done
-      if(is.na(studenti.voti[i,6]) && is.na(studenti.voti[i,8]) && !is.na(studenti.voti[i,10])){
+      #BB da fare
+      if(!is.na(studenti.voti[i,6]) && is.na(studenti.voti[i,8]) && is.na(studenti.voti[i,10])){
         studenti.voti$VotoAggregato[i] <- as.character(round(studenti.voti$BasiBiologicheNorm[i]))
       }
     }else if(!is.na(studenti.voti$CFU[i]) && studenti.voti$CFU[i] != 15){
