@@ -22,8 +22,10 @@ aggregaVotiModuli <- function(input.voti="studenti_votiBBBMGU.txt", output.voti=
   
   #aggiungi l'esito al file di aggregazione
   for(i in 1:dim(studenti.voti)[1]){
-    if(sum(is.na(studenti.voti[i,c(6,8,10)]))==0){
-      studenti.voti$VotoAggregato[i] <- as.character(round(studenti.voti$BasiBiologicheNorm[i] + studenti.voti$BiologiaMolecolareNorm[i] + studenti.voti$GeneticaUmanaNorm[i]))
+    if(!is.na(studenti.voti$CFU[i]) && studenti.voti$CFU[i] == 15){
+      if(sum(is.na(studenti.voti[i,c(6,8,10)]))==0){
+        studenti.voti$VotoAggregato[i] <- as.character(round(studenti.voti$BasiBiologicheNorm[i] + studenti.voti$BiologiaMolecolareNorm[i] + studenti.voti$GeneticaUmanaNorm[i]))
+      }
     }else if(!is.na(studenti.voti$CFU[i]) && studenti.voti$CFU[i] == 13){
       #BB and BM already done
       if(!is.na(studenti.voti[i,6]) && !is.na(studenti.voti[i,8]) && is.na(studenti.voti[i,10])){
