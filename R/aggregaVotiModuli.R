@@ -23,64 +23,64 @@ aggregaVotiModuli <- function(input.voti="studenti_votiBBBMGU.txt", output.voti=
   #aggiungi l'esito al file di aggregazione
   for(i in 1:dim(studenti.voti)[1]){
     if(!is.na(studenti.voti$CFU[i]) && studenti.voti$CFU[i] == 15){
-      if(sum(is.na(studenti.voti[i,c(6,8,10)]))==0){
-        if(min(studenti.voti[i,c(6,8,10)]) > 0){
+      if(!is.na(studenti.voti[i,6]) && !is.na(studenti.voti[i,8]) && !is.na(studenti.voti[i,10])){
+        if(min(studenti.voti[i,c(6,8,10)]) >= 18){
               studenti.voti$VotoAggregato[i] <- as.character(round(studenti.voti$BasiBiologicheNorm[i] + studenti.voti$BiologiaMolecolareNorm[i] + studenti.voti$GeneticaUmanaNorm[i]))
         }
        }
     }else if(!is.na(studenti.voti$CFU[i]) && studenti.voti$CFU[i] == 13){
       #BB e BM da fare
       if(!is.na(studenti.voti[i,6]) && !is.na(studenti.voti[i,8]) && is.na(studenti.voti[i,10])){
-        if(min(studenti.voti[i,c(6,8)]) > 0){
+        if(min(studenti.voti[i,c(6,8)]) >= 18){
               studenti.voti$VotoAggregato[i] <- as.character(round(studenti.voti$BasiBiologicheNorm[i] + studenti.voti$BiologiaMolecolareNorm[i]))
         }
       }
     }else if(!is.na(studenti.voti$CFU[i]) && studenti.voti$CFU[i] == 10){
       #BB e GU da fare
       if(!is.na(studenti.voti[i,6]) && is.na(studenti.voti[i,8]) && !is.na(studenti.voti[i,10])){
-        if(min(studenti.voti[i,c(6,10)]) > 0){
+        if(min(studenti.voti[i,c(6,10)]) >= 18){
              studenti.voti$VotoAggregato[i] <- as.character(round(studenti.voti$BasiBiologicheNorm[i] + studenti.voti$GeneticaUmanaNorm[i]))
         }
       }
     }else if(!is.na(studenti.voti$CFU[i]) && studenti.voti$CFU[i] == 7){
       #BM e GU da fare
       if(is.na(studenti.voti[i,6]) && !is.na(studenti.voti[i,8]) && !is.na(studenti.voti[i,10])){
-        if(min(studenti.voti[i,c(8,10)]) > 0){
+        if(min(studenti.voti[i,c(8,10)]) >= 18){
             studenti.voti$VotoAggregato[i] <- as.character(round(studenti.voti$BiologiaMolecolareNorm[i] + studenti.voti$GeneticaUmanaNorm[i]))
         }
       }
     }else if(!is.na(studenti.voti$CFU[i]) && studenti.voti$CFU[i] == 11){
       #BB e GU da fare
       if(!is.na(studenti.voti[i,6]) && is.na(studenti.voti[i,8]) && !is.na(studenti.voti[i,10])){
-        if(min(studenti.voti[i,c(6,10)]) > 0){
+        if(min(studenti.voti[i,c(6,10)]) >= 18){
             studenti.voti$VotoAggregato[i] <- as.character(round(studenti.voti$BasiBiologicheNorm[i] + studenti.voti$GeneticaUmanaNorm[i]))
         }
       }
     }else if(!is.na(studenti.voti$CFU[i]) && studenti.voti$CFU[i] == 3){
       #GU da fare 
       if(is.na(studenti.voti[i,6]) && is.na(studenti.voti[i,8]) && !is.na(studenti.voti[i,10])){
-        if(studenti.voti[i,10] > 0){
+        if(studenti.voti[i,10] >= 18){
             studenti.voti$VotoAggregato[i] <- as.character(round(studenti.voti$GeneticaUmanaNorm[i]))
         }
       }
     }else if(!is.na(studenti.voti$CFU[i]) && studenti.voti$CFU[i] == 2){
       #GU da fare 
       if(is.na(studenti.voti[i,6]) && is.na(studenti.voti[i,8]) && !is.na(studenti.voti[i,10])){
-        if(studenti.voti[i,10] > 0){
+        if(studenti.voti[i,10] >= 18){
             studenti.voti$VotoAggregato[i] <- as.character(round(studenti.voti$GeneticaUmanaNorm[i]))
         }
       }
     }else if(!is.na(studenti.voti$CFU[i]) && studenti.voti$CFU[i] == 5){
       #BM da fare
       if(is.na(studenti.voti[i,6]) && !is.na(studenti.voti[i,8]) && is.na(studenti.voti[i,10])){
-        if(studenti.voti[i,8] > 0){
+        if(studenti.voti[i,8] >= 18){
             studenti.voti$VotoAggregato[i] <- as.character(round(studenti.voti$BiologiaMolecolareNorm[i]))
         }
       }
     }else if(!is.na(studenti.voti$CFU[i]) && studenti.voti$CFU[i] == 8){
       #BB da fare
       if(!is.na(studenti.voti[i,6]) && is.na(studenti.voti[i,8]) && is.na(studenti.voti[i,10])){
-        if(studenti.voti[i,6] > 0){
+        if(studenti.voti[i,6] >= 18){
             studenti.voti$VotoAggregato[i] <- as.character(round(studenti.voti$BasiBiologicheNorm[i]))
         }
       }
