@@ -139,7 +139,7 @@ aggiungiRisultatiModulo <- function(excel.esame, input.voti, output.voti, modulo
   }else if(modulo=="BM"){
     
     if(identical(as.numeric(esito.esame.df[,1]), as.numeric(studenti.voti.esito.esame.df$MATRICOLA))){
-      studenti.voti.esito.esame.df$BasiBiologiche <- esito.esame.df[,2]
+      studenti.voti.esito.esame.df$BiologiaMolecolare <- esito.esame.df[,2]
       #converti esito esame in dato normalizzato
       #esito.esame:100=x:crediti$percentuale[crediti$modulo == "Basi Biologiche"]
       
