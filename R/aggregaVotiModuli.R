@@ -107,6 +107,7 @@ aggregaVotiModuli <- function(input.voti="studenti_votiBBBMGU.txt", output.voti=
             GeneticaUmanaNorm <- studenti.voti$GeneticaUmana[i]*gup/100
             studenti.voti$VotoAggregato[i] <- as.character(round(BiologiaMolecolareNorm + GeneticaUmanaNorm))
           }
+        }
       }
     }else if(!is.na(studenti.voti$CFU[i]) && studenti.voti$CFU[i] != 15){
       studenti.voti$VotoAggregato[i] <- "da controllare!"
