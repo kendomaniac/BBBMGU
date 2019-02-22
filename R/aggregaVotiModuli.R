@@ -96,7 +96,7 @@ aggregaVotiModuli <- function(input.voti="studenti_votiBBBMGU.txt", output.voti=
     }else if(!is.na(studenti.voti$CFU[i]) && studenti.voti$CFU[i] == 8){
       #BB da fare
       if(!is.na(studenti.voti[i,7]) && is.na(studenti.voti[i,9]) && is.na(studenti.voti[i,11])){
-        if(studenti.voti[i,7] >= 18){
+        if(min(studenti.voti[i,7]) >= 18){
             studenti.voti$VotoAggregato[i] <- as.character(round(studenti.voti$BasiBiologiche[i]))
         }
       }else if(is.na(studenti.voti[i,7]) && !is.na(studenti.voti[i,9]) && !is.na(studenti.voti[i,11])){
