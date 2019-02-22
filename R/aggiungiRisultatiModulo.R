@@ -25,9 +25,13 @@
 #' @export
 
 aggiungiRisultatiModulo <- function(excel.esame, input.voti, output.voti, modulo=c("BB","BM", "GU")){
+  
+  #defining function not equal
+  '%!in%' <- function(x,y)!('%in%'(x,y))
+  
   crediti <- read.table(paste(path.package(package="BBBMGU"),"/crediti.txt",sep="/"), sep="\t", header=T, stringsAsFactors = F)
   studenti.voti <- read.table(input.voti, sep="\t", header=T, stringsAsFactors = F, quote = "\"")
-  
+
   bb <- loadWorkbook(excel.esame)
   bb.df <- readWorksheet(bb, sheet=1)
   
@@ -35,64 +39,140 @@ aggiungiRisultatiModulo <- function(excel.esame, input.voti, output.voti, modulo
   matricola.col <- grep("Matricola", bb.df)
   matricola.row <- which(bb.df[, matricola.col]=="Matricola")
   matricola.esame <- as.numeric(bb.df[(matricola.row + 1):dim(bb.df)[1],matricola.col])
+
+  #######################################################################
   
   #identifica il numero di CFU
   cfu.col <- grep("CFU", bb.df[matricola.row,])
   cfu.esame <- as.numeric(bb.df[(matricola.row + 1):dim(bb.df)[1],cfu.col])
-  
+  cfu.esame.df <- data.frame(matricola.esame, cfu.esame, stringsAsFactors=F)
+
   #aggiungi cfu
-  studenti.voti$CFU[which(studenti.voti$MATRICOLA%in%matricola.esame)] <- cfu.esame[which(matricola.esame%in%studenti.voti$MATRICOLA)]
+  #separa gli studenti non considerati
+  studenti.voti.left <- studenti.voti[which(studenti.voti$MATRICOLA%!in%matricola.esame),]
+  #studenti a cui aggiungere CFU
+  studenti.voti.cfu.df <- studenti.voti[which(studenti.voti$MATRICOLA%in%matricola.esame),]
+  common <- intersect(studenti.voti.cfu.df$MATRICOLA, cfu.esame.df[,1])
+  #seleziona comuni
+  cfu.esame.df <- cfu.esame.df[which(cfu.esame.df[,1]%in%common),]
+  cfu.esame.df <- cfu.esame.df[order(cfu.esame.df[,1]),]
+  studenti.voti.cfu.df <- studenti.voti.cfu.df[which(studenti.voti.cfu.df$MATRICOLA%in%common),]
+  studenti.voti.cfu.df <- studenti.voti.cfu.df[order(studenti.voti.cfu.df$MATRICOLA),]
+  
+  if(identical(as.numeric(cfu.esame.df[,1]), as.numeric(studenti.voti.cfu.df$MATRICOLA))){
+    studenti.voti.cfu.df$CFU <- cfu.esame.df[,2]
+  }else{
+    cat("\nProblema nell'allineamento delle matricole per la copia dei CFU\n")
+    return(1)
+  }
+  studenti.voti <- rbind(studenti.voti.left, studenti.voti.cfu.df)
+  ##########################################################################
   
   #identifica anno di corso
   anno.col <- grep("^Anno", bb.df[matricola.row,])
   anno.corso <- bb.df[(matricola.row + 1):dim(bb.df)[1],anno.col]
   
   #aggiungi anno di corso
-  studenti.voti$AnnoCorso[which(studenti.voti$MATRICOLA%in%matricola.esame)] <- anno.corso[which(matricola.esame%in%studenti.voti$MATRICOLA)]
+  anno.corso.df <- data.frame(matricola.esame, anno.corso, stringsAsFactors=F)
+
+  #separa gli studenti non considerati
+  studenti.voti.left <- studenti.voti[which(studenti.voti$MATRICOLA%!in%matricola.esame),]
+  #studenti a cui aggiungere AnnoCorso
+  studenti.voti.anno.corso.df <- studenti.voti[which(studenti.voti$MATRICOLA%in%matricola.esame),]
+  common <- intersect(studenti.voti.anno.corso.df$MATRICOLA, anno.corso.df[,1])
+  #seleziona comuni
+  anno.corso.df <- anno.corso.df[which(anno.corso.df[,1]%in%common),]
+  anno.corso.df <- anno.corso.df[order(anno.corso.df[,1]),]
+  studenti.voti.anno.corso.df <- studenti.voti.anno.corso.df[which(studenti.voti.anno.corso.df$MATRICOLA%in%common),]
+  studenti.voti.anno.corso.df <- studenti.voti.anno.corso.df[order(studenti.voti.anno.corso.df$MATRICOLA),]
   
+  if(identical(as.numeric(anno.corso.df[,1]), as.numeric(studenti.voti.anno.corso.df$MATRICOLA))){
+    studenti.voti.anno.corso.df$AnnoCorso <- anno.corso.df[,2]
+  }else{
+    cat("\nProblema nell'allineamento delle matricole per la copia del AnnoCorso\n")
+    return(1)
+  }
+  studenti.voti <- rbind(studenti.voti.left, studenti.voti.anno.corso.df)
+  ##########################################################################
   
   #identifica dove e' l'esito
   esito.col <- grep("Esito", bb.df[matricola.row,])
   esito.esame <- as.numeric(bb.df[(matricola.row + 1):dim(bb.df)[1],esito.col])
   
+  #aggiungi esito
+  esito.esame.df <- data.frame(matricola.esame, esito.esame, stringsAsFactors=F)
+  
+  #separa gli studenti non considerati
+  studenti.voti.left <- studenti.voti[which(studenti.voti$MATRICOLA%!in%matricola.esame),]
+  #studenti a cui aggiungere esito
+  studenti.voti.esito.esame.df <- studenti.voti[which(studenti.voti$MATRICOLA%in%matricola.esame),]
+  common <- intersect(studenti.voti.esito.esame.df$MATRICOLA, esito.esame.df[,1])
+  #seleziona comuni
+  esito.esame.df <- esito.esame.df[which(esito.esame.df[,1]%in%common),]
+  esito.esame.df <- esito.esame.df[order(esito.esame.df[,1]),]
+  studenti.voti.esito.esame.df <- studenti.voti.esito.esame.df[which(studenti.voti.esito.esame.df$MATRICOLA%in%common),]
+  studenti.voti.esito.esame.df <- studenti.voti.esito.esame.df[order(studenti.voti.esito.esame.df$MATRICOLA),]
+   
+  
   if(modulo=="BB"){
     #studenti.voti$MatricolaVoti[which(studenti.voti$MATRICOLA%in%matricola.esame)] <- matricola.esame[which(matricola.esame%in%studenti.voti$MATRICOLA)]
     #aggiungi l'esito al file di aggregazione
-    studenti.voti$BasiBiologiche[which(studenti.voti$MATRICOLA%in%matricola.esame)] <- esito.esame[which(matricola.esame%in%studenti.voti$MATRICOLA)]
     
-    #converti esito esame in dato normalizzato
-    #esito.esame:100=x:crediti$percentuale[crediti$modulo == "Basi Biologiche"]
-    
-    esame.norm <- sapply(esito.esame, function(x,y){
-      esame.norm <- x*y/100
-    }, y=crediti$percentuale[crediti$modulo == "Basi Biologiche"])
-    
-    #aggiungi l'esito al file di aggregazione
-    studenti.voti$BasiBiologicheNorm[which(studenti.voti$MATRICOLA%in%matricola.esame)] <- esame.norm[which(matricola.esame%in%studenti.voti$MATRICOLA)]
+    if(identical(as.numeric(esito.esame.df[,1]), as.numeric(studenti.voti.esito.esame.df$MATRICOLA))){
+      studenti.voti.esito.esame.df$BasiBiologiche <- esito.esame.df[,2]
+      #converti esito esame in dato normalizzato
+      #esito.esame:100=x:crediti$percentuale[crediti$modulo == "Basi Biologiche"]
+      
+      esame.norm <- sapply(esito.esame.df[,2], function(x,y){
+        esame.norm <- x*y/100
+      }, y=crediti$percentuale[crediti$modulo == "Basi Biologiche"])
+      
+      #aggiungi l'esito al file di aggregazione
+      studenti.voti.esito.esame.df$BasiBiologicheNorm <- esame.norm
+      
+    }else{
+      cat("\nProblema nell'allineamento delle matricole per esito esame BB\n")
+      return(1)
+    }
+    studenti.voti <- rbind(studenti.voti.left, studenti.voti.esito.esame.df)
+
   }else if(modulo=="BM"){
-    #studenti.voti$MatricolaVoti[which(studenti.voti$MATRICOLA%in%matricola.esame)] <- matricola.esame[which(matricola.esame%in%studenti.voti$MATRICOLA)]
-    studenti.voti$BiologiaMolecolare[which(studenti.voti$MATRICOLA%in%matricola.esame)] <- esito.esame[which(matricola.esame%in%studenti.voti$MATRICOLA)]
     
-    #converti esito esame in dato normalizzato
-    #esito.esame:100=x:crediti$percentuale[crediti$modulo == "Biologia Molecolare"]
+    if(identical(as.numeric(esito.esame.df[,1]), as.numeric(studenti.voti.esito.esame.df$MATRICOLA))){
+      studenti.voti.esito.esame.df$BasiBiologiche <- esito.esame.df[,2]
+      #converti esito esame in dato normalizzato
+      #esito.esame:100=x:crediti$percentuale[crediti$modulo == "Basi Biologiche"]
+      
+      esame.norm <- sapply(esito.esame.df[,2], function(x,y){
+        esame.norm <- x*y/100
+      }, y=crediti$percentuale[crediti$modulo == "Biologia Molecolare"])
+      
+      #aggiungi l'esito al file di aggregazione
+      studenti.voti.esito.esame.df$BiologiaMolecolareNorm <- esame.norm
+      
+    }else{
+      cat("\nProblema nell'allineamento delle matricole per esito esame BM\n")
+      return(1)
+    }
+    studenti.voti <- rbind(studenti.voti.left, studenti.voti.esito.esame.df)
     
-    esame.norm <- sapply(esito.esame, function(x,y){
-      esame.norm <- x*y/100
-    }, y=crediti$percentuale[crediti$modulo == "Biologia Molecolare"])
-    
-    #aggiungi l'esito al file di aggregazione
-    studenti.voti$BiologiaMolecolareNorm[which(studenti.voti$MATRICOLA%in%matricola.esame)] <- esame.norm[which(matricola.esame%in%studenti.voti$MATRICOLA)]
   }else if(modulo=="GU"){
-    studenti.voti$GeneticaUmana[which(studenti.voti$MATRICOLA%in%matricola.esame)] <- esito.esame[which(matricola.esame%in%studenti.voti$MATRICOLA)]
+    if(identical(as.numeric(esito.esame.df[,1]), as.numeric(studenti.voti.esito.esame.df$MATRICOLA))){
+      studenti.voti.esito.esame.df$GeneticaUmana <- esito.esame.df[,2]
+      #converti esito esame in dato normalizzato
+      esame.norm <- sapply(esito.esame.df[,2], function(x,y){
+        esame.norm <- x*y/100
+      }, y=crediti$percentuale[crediti$modulo == "Genetica Umana"])
+      
+      #aggiungi l'esito al file di aggregazione
+      studenti.voti.esito.esame.df$GeneticaUmanaNorm <- esame.norm
+      
+    }else{
+      cat("\nProblema nell'allineamento delle matricole per esito esame GU\n")
+      return(1)
+    }
+    studenti.voti <- rbind(studenti.voti.left, studenti.voti.esito.esame.df)
     
-    #converti esito esame in dato normalizzato
-    #esito.esame:100=x:crediti$percentuale[crediti$modulo == "Genetica Umana"]
-    esame.norm <- sapply(esito.esame, function(x,y){
-      esame.norm <- x*y/100
-    }, y=crediti$percentuale[crediti$modulo == "Genetica Umana"])
-    
-    #aggiungi l'esito al file di aggregazione
-    studenti.voti$GeneticaUmanaNorm[which(studenti.voti$MATRICOLA%in%matricola.esame)] <- esame.norm[which(matricola.esame%in%studenti.voti$MATRICOLA)]
   }
   write.table(studenti.voti, output.voti, sep="\t", col.names = T, row.names=F)
   
