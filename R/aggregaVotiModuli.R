@@ -100,7 +100,7 @@ aggregaVotiModuli <- function(input.voti="studenti_votiBBBMGU.txt", output.voti=
             studenti.voti$VotoAggregato[i] <- as.character(round(studenti.voti$BasiBiologiche[i]))
         }
       }else if(is.na(studenti.voti[i,7]) && !is.na(studenti.voti[i,9]) && !is.na(studenti.voti[i,11])){
-        if(studenti.voti[i,c(9,11)] >= 18){
+        if(min(studenti.voti[i,c(9,11)]) >= 18){
           #situazione strana in cuisommo BM che e' 5 crediti BM e 3 per GU invece degli 8 dati a BB
           bmp <- 5/8*100
           BiologiaMolecolareNorm <- studenti.voti$BiologiaMolecolare[i]*bmp/100
