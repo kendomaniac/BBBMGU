@@ -10,7 +10,7 @@
 #' @examples
 #' \dontrun{
 #
-#' verbalizza(verbalizzazione="verbalizzante.xls", 
+#' verbalizza(excel.verbalizzazione="verbalizzante.xls", 
 #'                   voti.aggregati="canaleA_studenti_votiBBBMGU_aggregati_190227.txt",
 #'                   voti.verbalizzabili="canaleA_studenti_da_verbalizzare.txt", 
 #'                   studenti.missing="canaleA_studenti_da_verbalizzare_missing.txt")
