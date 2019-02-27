@@ -33,8 +33,10 @@ verbalizza <- function(excel.verbalizzazione, voti.aggregati, voti.verbalizzabil
   missing <- setdiff(matricola.esame, as.numeric(voti$MATRICOLA))
   cat("\nStudenti da verbalizzare ma non nel file generato dalla funzione aggregaVotiModuli", length(missing),"\n")
   if(length(missing) > 0){
-      bb.df <- bb.df[which(as.numeric(bb.df[(matricola.row + 1):dim(bb.df)[1],matricola.col])%in%missing),]
-      write.table(bb.df, studenti.missing, sep="\t", col.names = T, row.names=F)
+      bb1.df <- bb.df[(matricola.row + 1):dim(bb.df)[1],]
+      names(bb1.df) <- bb.df[matricola.row,]
+      bb1.df <- bb1.df[which(as.numeric(bb1.df$Matricola) %in% missing),]
+      write.table(bb1.df, studenti.missing, sep="\t", col.names = T, row.names=F)
   }
   #scrivi risultati del voto aggregato
   write.table(voti.selezionati, voti.verbalizzabili, sep="\t", col.names = T, row.names=F)
