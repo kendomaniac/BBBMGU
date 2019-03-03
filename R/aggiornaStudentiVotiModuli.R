@@ -28,12 +28,16 @@ aggiornaStudentiVotiModuli<- function(basiBiologiche, biologiaMolecolare, geneti
   #i duplicati
   all.2 <- all[duplicated(all$MATRICOLA),]
   #controllo quali elementi hanno valori gia' assegnati
-  some.nona <- apply(all.2, 1,function(x){length(!is.na(x[7:13]))})
+  some.nona <- apply(all.2, 1,function(x){
+    length(!is.na(as.numeric(x[7:13])))
+           })
   all.2 <- all.2[which(some.nona > 0),]
   #identifico i duplicati con i voti bel file senza duplicati
   all.3 <- all.1[which(all.1$MATRICOLA %in%all.2$MATRICOLA),]
   #controllo quali elementi hanno valori assegnati
-  some.nona <- apply(all.3, 1,function(x){length(!is.na(x[7:13]))})
+  some.nona <- apply(all.3, 1,function(x){
+    length(!is.na(as.numeric(x[7:13])))
+           })
   #identifico i non duplicati con valori assegnati
   all.3 <- all.3[which(some.nona > 0),]
   #non dovrebbero esserci sovrapposizioni tra all.2. ed all.3
@@ -41,7 +45,7 @@ aggiornaStudentiVotiModuli<- function(basiBiologiche, biologiaMolecolare, geneti
   
   if(length(critical) == 0){
     all.0 <- all.1[which(all.$MATRICOLA %!in% c(all.2$MATRICOLA, all.3$MATRICOLA)),]
-    all.final <- rbindi(all.0, all.2, all.3)
+    all.final <- rbind(all.0, all.2, all.3)
     
     cat("\nIl file studenti_voti.txt e' stato creato\n")
     write.table(all.final, "studenti_voti.txt", sep="\t", col.names = T, row.names=F)
@@ -53,7 +57,7 @@ aggiornaStudentiVotiModuli<- function(basiBiologiche, biologiaMolecolare, geneti
     write.table(all.3, "all3noduplicati.txt", sep="\t", col.names = T, row.names=F)
     
     all.0 <- all.1[which(all.$MATRICOLA %!in% c(all.2$MATRICOLA, all.3$MATRICOLA)),]
-    all.final <- rbindi(all.0, all.2, all.3)
+    all.final <- rbind(all.0, all.2, all.3)
     cat("\nIl file studenti_voti.txt e' stato creato ma ci sono problemi nei duplicati: controllare!\n")
     write.table(all.final, "studenti_voti.txt", sep="\t", col.names = T, row.names=F)
     return(1)
