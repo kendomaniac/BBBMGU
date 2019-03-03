@@ -56,8 +56,6 @@ aggiornaStudentiVotiModuli<- function(basiBiologiche, biologiaMolecolare, geneti
     all.final <- rbindi(all.0, all.2, all.3)
     cat("\nIl file studenti_voti.txt e' stato creato ma ci sono problemi nei duplicati: controllare!\n")
     write.table(all.final, "studenti_voti.txt", sep="\t", col.names = T, row.names=F)
-    
-    
     return(1)
   }
 }
