@@ -29,14 +29,14 @@ aggiornaStudentiVotiModuli<- function(basiBiologiche, biologiaMolecolare, geneti
   all.2 <- all[duplicated(all$MATRICOLA),]
   #controllo quali elementi hanno valori gia' assegnati
   some.nona <- apply(all.2, 1,function(x){
-    length(!is.na(as.numeric(x[7:13])))
+    sum(!is.na(x[7:13]))
            })
   all.2 <- all.2[which(some.nona > 0),]
   #identifico i duplicati con i voti bel file senza duplicati
   all.3 <- all.1[which(all.1$MATRICOLA %in%all.2$MATRICOLA),]
   #controllo quali elementi hanno valori assegnati
   some.nona <- apply(all.3, 1,function(x){
-    length(!is.na(as.numeric(x[7:13])))
+    sum(!is.na(x[7:13]))
            })
   #identifico i non duplicati con valori assegnati
   all.3 <- all.3[which(some.nona > 0),]
