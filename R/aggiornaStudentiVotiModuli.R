@@ -33,7 +33,7 @@ aggiornaStudentiVotiModuli<- function(basiBiologiche, biologiaMolecolare, geneti
            })
   all.2 <- all.2[which(some.nona > 0),]
   #identifico i duplicati con i voti bel file senza duplicati
-  all.3 <- all.1[which(all.1$MATRICOLA %in%all.2$MATRICOLA),]
+  all.3 <- all.1[which(all.1$MATRICOLA %in% all.2$MATRICOLA),]
   #controllo quali elementi hanno valori assegnati
   some.nona <- apply(all.3, 1,function(x){
     sum(!is.na(x[7:13]))
@@ -44,7 +44,7 @@ aggiornaStudentiVotiModuli<- function(basiBiologiche, biologiaMolecolare, geneti
   critical <- intersect(all.2$MATRICOLA, all.3$MATRICOLA)
   
   if(length(critical) == 0){
-    all.0 <- all.1[which(all.$MATRICOLA %!in% c(all.2$MATRICOLA, all.3$MATRICOLA)),]
+    all.0 <- all.1[which(all.1.$MATRICOLA %!in% c(all.2$MATRICOLA, all.3$MATRICOLA)),]
     all.final <- rbind(all.0, all.2, all.3)
     
     cat("\nIl file studenti_voti.txt e' stato creato\n")
