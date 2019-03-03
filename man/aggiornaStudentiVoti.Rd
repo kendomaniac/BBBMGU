@@ -4,28 +4,34 @@
 \alias{aggiornaStudentiVoti}
 \title{Una funzione che crea una lista voti.}
 \usage{
-aggiornaStudentiVoti(excel.esame, elenco.studenti)
+aggiornaStudentiVoti(excel.esame, elenco.studenti = NULL,
+  voti.studenti = NULL)
 }
 \arguments{
 \item{excel.esame, }{e' l'excel scaricato per un modulo dalle prove parziali su SS3.}
 
 \item{elenco.studenti, }{e' l'elenco degli studenti dell'anno in corso per un certo canale.}
+
+\item{voti.studenti, }{voti aggreati output di aggregaVotiModuli}
 }
 \value{
-Un data.frame aggiornato con i nuovi studenti. Importante questo data.frame e' completamente vuoto
+Un data.frame aggiornato con i nuovi studenti. Importante questo data.frame e' completamente vuoto se elenco.studenti non e' diverso da null. Invece se voti.studenti diverso da null e' il file aggregato outpout di aggregaVotiModuli aggiornato
 }
 \description{
 Una funzione che crea una lista voti vuota e la aggiorna per la presenza di studenti non presenti nella lista dell'anno in corso.
 }
 \examples{
 \dontrun{
+#questo formato di query  solo per il primo esame dell'anno poi elenco.studenti  null e si usano i voti aggregati voti.studenti
 bb.set <- aggiornaStudentiVoti(excel.esame="basi_biologiche.xls", 
-                                elenco.studenti="../canaleA_studenti.txt")
+                                elenco.studenti="../canaleA_studenti.txt", voti.studenti=NULL)
 bm.set <- aggiornaStudentiVoti(excel.esame="biologia_molecolare.xls", 
-                                elenco.studenti="../canaleA_studenti.txt")
+                                elenco.studenti="../canaleA_studenti.txt", voti.studenti=NULL)
 gu.set <- aggiornaStudentiVoti(excel.esame="genetica_umana.xls", 
-                                elenco.studenti="../canaleA_studenti.txt")
-
+                                elenco.studenti="../canaleA_studenti.txt", voti.studenti=NULL)
+#questo formato e' quello che usa i risultati aggregati
+bb.set <- aggiornaStudentiVoti(excel.esame="basi_biologiche.xls", 
+                                elenco.studenti=NULL, voti.studenti="canaleA_studenti_votiBBBMGU_aggregati_190214_conDic2018.txt")
 }
 
 }
