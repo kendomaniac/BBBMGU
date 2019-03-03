@@ -47,7 +47,8 @@ aggiornaStudentiVotiModuli<- function(basiBiologiche, biologiaMolecolare, geneti
     write.table(all.final, "studenti_voti.txt", sep="\t", col.names = T, row.names=F)
     return(0)
   }else{
-    cat("\nATTENZIONE: ci sono dei duplicati con dei voti! Non dovrebbe succedere.\n Controllare i files all2duplicati.txt ed all3noduplicati.txt\n")
+    cat("\nATTENZIONE: ci sono dei duplicati con dei voti! Non dovrebbe succedere.
+        \nControllare i files all2duplicati.txt ed all3noduplicati.txt\n")
     write.table(all.2, "all2duplicati.txt", sep="\t", col.names = T, row.names=F)
     write.table(all.3, "all3noduplicati.txt", sep="\t", col.names = T, row.names=F)
     
