@@ -10,7 +10,7 @@ aggregaVotiModuli(input.voti = "studenti_votiBBBMGU.txt",
 \arguments{
 \item{input.voti, }{output di aggiungiRisultatiModulo con i risultati dei tre moduli.}
 
-\item{output.voti, }{il nome del file in cui salvar ei risultati.}
+\item{output.voti, }{il nome del file in cui salvare i risultati.}
 }
 \value{
 Il file tab delimited  riempito con i risultati di uno dei tre moduli e con il voto finale aggregato.

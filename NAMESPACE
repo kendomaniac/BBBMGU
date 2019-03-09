@@ -3,5 +3,6 @@
 export(aggiornaStudentiVoti)
 export(aggiornaStudentiVotiModuli)
 export(aggiungiRisultatiModulo)
+export(aggregaAppelli)
 export(aggregaVotiModuli)
 export(verbalizza)

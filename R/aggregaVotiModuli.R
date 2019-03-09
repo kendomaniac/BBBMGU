@@ -1,7 +1,7 @@
 #' @title Una funzione che aggrega i voti dei moduli generati con aggiungiRisultatiModulo.
 #' @description Una funzione che aggrega i voti dei moduli generati con aggiungiRisultatiModulo. Il numero di crediti e' usato per definire quali risultati parziali vanno aggregati.
 #' @param input.voti, output di aggiungiRisultatiModulo con i risultati dei tre moduli.
-#' @param output.voti, il nome del file in cui salvar ei risultati.
+#' @param output.voti, il nome del file in cui salvare i risultati.
 #' @author Raffaele Calogero, raffaele.calogero [at] unito [dot] it, University of Torino, Italy
 #' @return  Il file tab delimited  riempito con i risultati di uno dei tre moduli e con il voto finale aggregato.
 #'
