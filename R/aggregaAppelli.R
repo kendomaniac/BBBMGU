@@ -76,8 +76,10 @@ aggregaAppelli <- function(aggregati.precedente, aggregati.odierno, output.voti)
         if(min(as.numeric(studenti.voti[i,c(7,9)])) >= 18){
           bbp <- 8/13*100
           BasiBiologicheNorm <- as.numeric(studenti.voti$BasiBiologiche[i])*bbp/100
+          studenti.voti$BasiBiologicheNorm[i] <- BasiBiologicheNorm
           bmp <- 5/13*100
           BiologiaMolecolareNorm <- as.numeric(studenti.voti$BiologiaMolecolare[i])*bmp/100
+          studenti.voti$BiologiaMolecolareNorm[i] <- BiologiaMolecolareNorm
           studenti.voti$VotoAggregato[i] <- as.character(round(BasiBiologicheNorm + BiologiaMolecolareNorm))
         }
       }
@@ -87,8 +89,10 @@ aggregaAppelli <- function(aggregati.precedente, aggregati.odierno, output.voti)
         if(min(as.numeric(studenti.voti[i,c(7,11)])) >= 18){
           bbp <- 8/10*100
           BasiBiologicheNorm <- as.numeric(studenti.voti$BasiBiologiche[i])*bbp/100
+          studenti.voti$BasiBiologicheNorm[i] <- BasiBiologicheNorm
           gup <- 2/10*100
           GeneticaUmanaNorm <- as.numeric(studenti.voti$GeneticaUmana[i])*gup/100
+          studenti.voti$GeneticaUmanaNorm[i] <- GeneticaUmanaNorm
           studenti.voti$VotoAggregato[i] <- as.character(round(BasiBiologicheNorm + GeneticaUmanaNorm))
         }
       }
@@ -98,8 +102,10 @@ aggregaAppelli <- function(aggregati.precedente, aggregati.odierno, output.voti)
         if(min(as.numeric(studenti.voti[i,c(9,11)])) >= 18){
           bmp <- 5/7*100
           BiologiaMolecolareNorm <- as.numeric(studenti.voti$BiologiaMolecolare[i])*bmp/100
+          studenti.voti$BiologiaMolecolareNorm[i] <- BiologiaMolecolareNorm
           gup <- 2/7*100
           GeneticaUmanaNorm <- as.numeric(studenti.voti$GeneticaUmana[i])*gup/100
+          studenti.voti$GeneticaUmanaNorm[i] <- GeneticaUmanaNorm
           studenti.voti$VotoAggregato[i] <- as.character(round(BiologiaMolecolareNorm + GeneticaUmanaNorm))
         }
       }
@@ -109,8 +115,10 @@ aggregaAppelli <- function(aggregati.precedente, aggregati.odierno, output.voti)
         if(min(as.numeric(studenti.voti[i,c(7,11)])) >= 18){
           bbp <- 8/11*100
           BasiBiologicheNorm <- as.numeric(studenti.voti$BasiBiologiche[i])*bbp/100
+          studenti.voti$BasiBiologicheNorm[i] <- BasiBiologicheNorm
           gup <- 3/11*100
           GeneticaUmanaNorm <- as.numeric(studenti.voti$GeneticaUmana[i])*gup/100
+          studenti.voti$GeneticaUmanaNorm[i] <- GeneticaUmanaNorm
           studenti.voti$VotoAggregato[i] <- as.character(round(BasiBiologicheNorm + GeneticaUmanaNorm))
         }
       }
@@ -119,6 +127,7 @@ aggregaAppelli <- function(aggregati.precedente, aggregati.odierno, output.voti)
       if(is.na(studenti.voti[i,7]) && is.na(studenti.voti[i,9]) && !is.na(studenti.voti[i,11])){
         if(as.numeric(studenti.voti[i,11]) >= 18){
           studenti.voti$VotoAggregato[i] <- as.character(round(as.numeric(studenti.voti$GeneticaUmana[i])))
+          studenti.voti$GeneticaUmanaNorm[i] <- as.character(round(as.numeric(studenti.voti$GeneticaUmana[i])))
         }
       }
     }else if(!is.na(studenti.voti$CFU[i]) && studenti.voti$CFU[i] == 2){
@@ -126,6 +135,7 @@ aggregaAppelli <- function(aggregati.precedente, aggregati.odierno, output.voti)
       if(is.na(studenti.voti[i,7]) && is.na(studenti.voti[i,9]) && !is.na(studenti.voti[i,11])){
         if(as.numeric(studenti.voti[i,11]) >= 18){
           studenti.voti$VotoAggregato[i] <- as.character(round(as.numeric(studenti.voti$GeneticaUmana[i])))
+          studenti.voti$GeneticaUmanaNorm[i] <- as.character(round(as.numeric(studenti.voti$GeneticaUmana[i])))
         }
       }
     }else if(!is.na(studenti.voti$CFU[i]) && studenti.voti$CFU[i] == 5){
@@ -133,6 +143,7 @@ aggregaAppelli <- function(aggregati.precedente, aggregati.odierno, output.voti)
       if(is.na(studenti.voti[i,7]) && !is.na(studenti.voti[i,9]) && is.na(studenti.voti[i,11])){
         if(as.numeric(studenti.voti[i,9]) >= 18){
           studenti.voti$VotoAggregato[i] <- as.character(round(as.numeric(studenti.voti$BiologiaMolecolare[i])))
+          studenti.voti$BiologiaMolecolareNorm[i] <- as.character(round(as.numeric(studenti.voti$BiologiaMolecolare[i])))
         }
       }
     }else if(!is.na(studenti.voti$CFU[i]) && studenti.voti$CFU[i] == 8){
@@ -140,14 +151,17 @@ aggregaAppelli <- function(aggregati.precedente, aggregati.odierno, output.voti)
       if(!is.na(studenti.voti[i,7]) && is.na(studenti.voti[i,9]) && is.na(studenti.voti[i,11])){
         if(min(as.numeric(studenti.voti[i,7])) >= 18){
           studenti.voti$VotoAggregato[i] <- as.character(round(as.numeric(studenti.voti$BasiBiologiche[i])))
+          studenti.voti$BasiBiologicheNorm[i] <- as.character(round(as.numeric(studenti.voti$BasiBiologiche[i])))
         }
       }else if(is.na(studenti.voti[i,7]) && !is.na(studenti.voti[i,9]) && !is.na(studenti.voti[i,11])){
         if(min(as.numeric(studenti.voti[i,c(9,11)])) >= 18){
           #situazione strana in cuisommo BM che e' 5 crediti BM e 3 per GU invece degli 8 dati a BB
           bmp <- 5/8*100
           BiologiaMolecolareNorm <- as.numeric(studenti.voti$BiologiaMolecolare[i])*bmp/100
+          studenti.voti$BiologiaMolecolareNorm[i] <- BiologiaMolecolareNorm
           gup <- 3/8*100
           GeneticaUmanaNorm <- as.numeric(studenti.voti$GeneticaUmana[i])*gup/100
+          studenti.voti$GeneticaUmanaNorm[i] <- GeneticaUmanaNorm
           studenti.voti$VotoAggregato[i] <- as.character(round(BiologiaMolecolareNorm + GeneticaUmanaNorm))
         }
       }
