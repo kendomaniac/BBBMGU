@@ -25,7 +25,13 @@ aggregaVotiModuli <- function(input.voti="studenti_votiBBBMGU.txt", output.voti=
     if(!is.na(studenti.voti$CFU[i]) && studenti.voti$CFU[i] == 15){
       if(!is.na(studenti.voti[i,7]) && !is.na(studenti.voti[i,9]) && !is.na(studenti.voti[i,11])){
         if(min(studenti.voti[i,c(7,9,11)]) >= 18){
-              studenti.voti$VotoAggregato[i] <- as.character(round(studenti.voti$BasiBiologicheNorm[i] + studenti.voti$BiologiaMolecolareNorm[i] + studenti.voti$GeneticaUmanaNorm[i]))
+              bbp <- 8/15*100
+              BasiBiologicheNorm <- studenti.voti$BasiBiologiche[i]*bbp/100
+              bmp <- 5/15*100
+              BiologiaMolecolareNorm <- studenti.voti$BiologiaMolecolare[i]*bmp/100
+              gup <- 2/15*100
+              GeneticaUmanaNorm <- studenti.voti$GeneticaUmana[i]*gup/100
+              studenti.voti$VotoAggregato[i] <- as.character(round(BasiBiologicheNorm + BiologiaMolecolareNorm + GeneticaUmanaNorm))
         }
        }
     }else if(!is.na(studenti.voti$CFU[i]) && studenti.voti$CFU[i] == 13){

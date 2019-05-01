@@ -1,7 +1,7 @@
 Package: BBBMGU
-Version: 0.0.1
+Version: 0.0.2
 Title: Un tool per aggregare dati di esami parziali di un corso integrato
-Date: 2019-15-02
+Date: 2019-01-05
 Authors@R: c(person("Raffaele", "Calogero", role = c("aut", "cre"),
                      email = "raffaele.calogero@unito.it"))
 Author: Raffaele Calogero [aut, cre],
