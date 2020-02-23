@@ -22,7 +22,7 @@ verbalizza <- function(excel.verbalizzazione, voti.aggregati, voti.verbalizzabil
   #carica dati da prenotazione verbalizzazione
   #obsolete bb <- loadWorkbook(excel.verbalizzazione)
   #obsolete bb.df <- readWorksheet(bb, sheet=1)
-  bb.df <- read_xls(excel.esame, sheet=1)
+  bb.df <- read_xls(excel.verbalizzazione, sheet=1)
   #identifica dove e' la matricola
   matricola.col <- grep("Matricola", bb.df)
   matricola.row <- which(bb.df[, matricola.col]=="Matricola")
