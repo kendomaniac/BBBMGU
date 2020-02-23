@@ -26,20 +26,24 @@ aggiornaStudentiVoti <- function(excel.esame, elenco.studenti=NULL){
                               GeneticaUmana=rep(NA,dim(studenti)[1]), GeneticaUmanaNorm=rep(NA,dim(studenti)[1]),
                               VotoAggregato=rep(NA,dim(studenti)[1]), stringsAsFactors = F
     )
-    #install.packages("XLConnect")
-  #  library(XLConnect)
+    #install.packages("readxl")
+    #library("readxl")
+    # per xlsx install.packages("xlsx")
+    #obsolete install.packages("XLConnect")
+    # obsolete library(XLConnect)
     #integrare tabella iniziale studenti
     #carica basi biologiche dal output della prova preliminare scaricata da SS3
-    bb <- loadWorkbook(excel.esame)
-    bb.df <- readWorksheet(bb, sheet=1)
+    bb.df <- read_xls(excel.esame, sheet=1)
+    #bb <- loadWorkbook(excel.esame)
+    #bb.df <- readWorksheet(bb, sheet=1)
     #identifica dove e' la matricola
     matricola.col <- grep("Matricola", bb.df)
     matricola.row <- which(bb.df[, matricola.col]=="Matricola")
-    matricola.esame <- as.numeric(bb.df[(matricola.row + 1):dim(bb.df)[1],matricola.col])
+    matricola.esame <- as.numeric(unlist(bb.df[(matricola.row + 1):dim(bb.df)[1],matricola.col]))
     cognome.col <- grep("^Cognome", bb.df[matricola.row,])
-    cognome <- bb.df[(matricola.row + 1):dim(bb.df)[1],cognome.col]
+    cognome <- as.character(unlist(bb.df[(matricola.row + 1):dim(bb.df)[1],cognome.col]))
     nome.col <- grep("^Nome", bb.df[matricola.row,])
-    nome <- bb.df[(matricola.row + 1):dim(bb.df)[1],nome.col]
+    nome <- as.character(unlist(bb.df[(matricola.row + 1):dim(bb.df)[1],nome.col]))
     extra.matricola <- setdiff(matricola.esame, studenti$MATRICOLA)
     if(length(extra.matricola) > 0){
       #creare tabella studenti voti con studenti non inseriti nella normale tabella canale

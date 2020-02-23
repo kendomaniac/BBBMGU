@@ -20,12 +20,13 @@
 
 verbalizza <- function(excel.verbalizzazione, voti.aggregati, voti.verbalizzabili, studenti.missing){
   #carica dati da prenotazione verbalizzazione
-  bb <- loadWorkbook(excel.verbalizzazione)
-  bb.df <- readWorksheet(bb, sheet=1)
+  #obsolete bb <- loadWorkbook(excel.verbalizzazione)
+  #obsolete bb.df <- readWorksheet(bb, sheet=1)
+  bb.df <- read_xls(excel.esame, sheet=1)
   #identifica dove e' la matricola
   matricola.col <- grep("Matricola", bb.df)
   matricola.row <- which(bb.df[, matricola.col]=="Matricola")
-  matricola.esame <- as.numeric(bb.df[(matricola.row + 1):dim(bb.df)[1],matricola.col])
+  matricola.esame <- as.numeric(unlist(bb.df[(matricola.row + 1):dim(bb.df)[1],matricola.col]))
   
   #carica risultati di aggiungiRisultatiModulo che include i tre moduli
   voti <- read.table(voti.aggregati, sep="\t", header=T, stringsAsFactors = F, quote = "\"")

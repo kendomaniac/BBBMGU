@@ -4,8 +4,12 @@
 \alias{verbalizza}
 \title{Una funzione che selezione gli studenti da verbalizzare.}
 \usage{
-verbalizza(excel.verbalizzazione, voti.aggregati, voti.verbalizzabili,
-  studenti.missing)
+verbalizza(
+  excel.verbalizzazione,
+  voti.aggregati,
+  voti.verbalizzabili,
+  studenti.missing
+)
 }
 \arguments{
 \item{excel.verbalizzazione, }{file excel della prenotazione per appello verbalizzante.}

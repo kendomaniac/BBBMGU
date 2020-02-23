@@ -4,8 +4,7 @@
 \alias{aggiornaStudentiVotiModuli}
 \title{Una funzione che aggrega output di aggiornaStudentiVoti.}
 \usage{
-aggiornaStudentiVotiModuli(basiBiologiche, biologiaMolecolare,
-  geneticaUmana)
+aggiornaStudentiVotiModuli(basiBiologiche, biologiaMolecolare, geneticaUmana)
 }
 \arguments{
 \item{basiBiologiche, }{output di aggiornaStudentiVoti per Basi Biologiche, update studenti.}

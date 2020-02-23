@@ -32,19 +32,23 @@ aggiungiRisultatiModulo <- function(excel.esame, input.voti, output.voti, modulo
   crediti <- read.table(paste(path.package(package="BBBMGU"),"/crediti.txt",sep="/"), sep="\t", header=T, stringsAsFactors = F)
   studenti.voti <- read.table(input.voti, sep="\t", header=T, stringsAsFactors = F, quote = "\"")
 
-  bb <- loadWorkbook(excel.esame)
-  bb.df <- readWorksheet(bb, sheet=1)
+  #obsolete bb <- loadWorkbook(excel.esame)
+  #obsolete bb.df <- readWorksheet(bb, sheet=1)
+  
+  bb.df <- read_xls(excel.esame, sheet=1)
+  
   
   #identifica dove e' la matricola
   matricola.col <- grep("Matricola", bb.df)
   matricola.row <- which(bb.df[, matricola.col]=="Matricola")
-  matricola.esame <- as.numeric(bb.df[(matricola.row + 1):dim(bb.df)[1],matricola.col])
-
+  #matricola.esame <- as.numeric(bb.df[(matricola.row + 1):dim(bb.df)[1],matricola.col])
+  matricola.esame <- as.numeric(unlist(bb.df[(matricola.row + 1):dim(bb.df)[1],matricola.col]))
+  
   #######################################################################
   
   #identifica il numero di CFU
   cfu.col <- grep("CFU", bb.df[matricola.row,])
-  cfu.esame <- as.numeric(bb.df[(matricola.row + 1):dim(bb.df)[1],cfu.col])
+  cfu.esame <- as.numeric(unlist(bb.df[(matricola.row + 1):dim(bb.df)[1],cfu.col]))
   cfu.esame.df <- data.frame(matricola.esame, cfu.esame, stringsAsFactors=F)
 
   #aggiungi cfu
@@ -70,7 +74,7 @@ aggiungiRisultatiModulo <- function(excel.esame, input.voti, output.voti, modulo
   
   #identifica anno di corso
   anno.col <- grep("^Anno", bb.df[matricola.row,])
-  anno.corso <- bb.df[(matricola.row + 1):dim(bb.df)[1],anno.col]
+  anno.corso <- as.character(unlist(bb.df[(matricola.row + 1):dim(bb.df)[1],anno.col]))
   
   #aggiungi anno di corso
   anno.corso.df <- data.frame(matricola.esame, anno.corso, stringsAsFactors=F)
@@ -97,7 +101,7 @@ aggiungiRisultatiModulo <- function(excel.esame, input.voti, output.voti, modulo
   
   #identifica dove e' l'esito
   esito.col <- grep("Esito", bb.df[matricola.row,])
-  esito.esame <- as.numeric(bb.df[(matricola.row + 1):dim(bb.df)[1],esito.col])
+  esito.esame <- as.numeric(unlist(bb.df[(matricola.row + 1):dim(bb.df)[1],esito.col]))
   
   #aggiungi esito
   esito.esame.df <- data.frame(matricola.esame, esito.esame, stringsAsFactors=F)

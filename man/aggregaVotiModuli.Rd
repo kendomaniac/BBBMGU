@@ -4,8 +4,10 @@
 \alias{aggregaVotiModuli}
 \title{Una funzione che aggrega i voti dei moduli generati con aggiungiRisultatiModulo.}
 \usage{
-aggregaVotiModuli(input.voti = "studenti_votiBBBMGU.txt",
-  output.voti = "studenti_votiBBBMGU_aggregati.txt")
+aggregaVotiModuli(
+  input.voti = "studenti_votiBBBMGU.txt",
+  output.voti = "studenti_votiBBBMGU_aggregati.txt"
+)
 }
 \arguments{
 \item{input.voti, }{output di aggiungiRisultatiModulo con i risultati dei tre moduli.}
