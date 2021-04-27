@@ -168,10 +168,19 @@ aggregaAppelli <- function(aggregati.precedente, aggregati.odierno, output.voti)
     }else if(!is.na(studenti.voti$CFU[i]) && studenti.voti$CFU[i] != 15){
       studenti.voti$VotoAggregato[i] <- "da controllare!"
     }
+   }
   }
+  
+  # ricalcola voto aggregato
+  cat("\nRicalcola voto integrato\n")
+  for(i in 1:dim(studenti.voti)[1]){
+    if(!is.na(studenti.voti$VotoAggregato[i])){
+      studenti.voti[i,dim(studenti.voti)[2]] <- sum(as.numeric(studenti.voti$BasiBiologicheNorm[i]), as.numeric(studenti.voti$BiologiaMolecolareNorm[i]), as.numeric(studenti.voti$GeneticaUmanaNorm[i]), na.rm = T)
+    }
   }
   
   #scrivi risultati del voto aggregato
   write.table(studenti.voti, output.voti, sep="\t", col.names = T, row.names=F)
 }
+
 
